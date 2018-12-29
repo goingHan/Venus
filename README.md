@@ -57,5 +57,12 @@ main.py脚本的 self.bak_dir = 'D:\Game\Config' 这行代码是目前的备份�
 ```
 意思是使用venus用户密码123.com在192.168.200.12服务器的/app目录下查找Es*.py模式的文件下载到本地的/app/ftp目录下。
 
+#### 运行
+----
+python main.py '日志路径'
+- 日志路径是用来存储日志
+建议使用nohup运行,如：
+`nohup python main.py /app/log >> /app/log/venus.out 2>&1`
+
 #### qq群
 脚本和文档写的仓促，有问题就请加入 630300475 QQ群。@搬砖工即可。
