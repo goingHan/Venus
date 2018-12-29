@@ -4,6 +4,7 @@ import logging
 import traceback
 from bin.base import BaseObject
 import datetime
+import os
 
 """
 v1.0.1
@@ -16,7 +17,7 @@ v1.0.1
 
 class LogGenerator(BaseObject):
 
-    def __init__(self, log_que, event):
+    def __init__(self, log_que, event, logdir):
         self.log_format = logging.Formatter("%(asctime)s - %(levelname)s - %(statusCode)s  "
                                             "%(statusInfo)s - %(message)s")
         super().__init__()
@@ -27,11 +28,12 @@ class LogGenerator(BaseObject):
         self.local_logger = None
         self.start_time = datetime.datetime.now()
         self.count = 0
+        self.logdir = logdir
 
     def __set_up_log(self):
         logger = logging.getLogger('UP')
         logger.setLevel(logging.INFO)
-        log_name = "../logs/up.log"
+        log_name = os.path.join(self.logdir, 'up.log')
         fh = logging.FileHandler(log_name, mode='a+')
         fh.setLevel(logging.INFO)
         fh.setFormatter(self.log_format)
@@ -41,7 +43,7 @@ class LogGenerator(BaseObject):
     def __set_down_log(self):
         logger = logging.getLogger('DOWN')
         logger.setLevel(logging.INFO)
-        log_name = "../logs/down.log"
+        log_name = os.path.join(self.logdir, 'down.log')
         fh = logging.FileHandler(log_name, mode='a+')
         fh.setLevel(logging.INFO)
         fh.setFormatter(self.log_format)
@@ -51,7 +53,7 @@ class LogGenerator(BaseObject):
     def __set_local_log(self):
         logger = logging.getLogger('LOCAL')
         logger.setLevel(logging.INFO)
-        log_name = "../logs/local.log"
+        log_name = os.path.join(self.logdir, 'local.log')
         fh = logging.FileHandler(log_name, mode='a+')
         fh.setLevel(logging.INFO)
         fh.setFormatter(self.log_format)
