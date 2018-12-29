@@ -8,7 +8,7 @@
 
 #### 用到的工具
 ----
-- Python2或者3
+- Python3
 - Python paramiko
 - Python threadpool
 
