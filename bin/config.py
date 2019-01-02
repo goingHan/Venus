@@ -71,7 +71,8 @@ class ReadConfig(BaseObject):
 
     def __remove_n(self, list_obj):
         try:
-            return list_obj.remove('\n')
+            list_obj.remove('\n')
+            return list_obj
         except ValueError:
             return list_obj
         except:
