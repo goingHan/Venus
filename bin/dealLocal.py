@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 # encoding: utf-8
-from bin.base import BaseObject
-import glob
+
+try:
+    from bin.base import MoreBase
+except ModuleNotFoundError:
+    from base import MoreBase
 import os
-import shutil
-import stat
 import traceback
 
 """
-v1.0.1
 @author: hananmin
 @time: 2018/12/29 10:57
 @function:
@@ -16,106 +16,50 @@ v1.0.1
 """
 
 
-class LocalOperate(BaseObject):
+class LocalOperate(MoreBase):
 
-    def __init__(self, log_que, temp_config, bak_dir):
-        super().__init__()
+    def __init__(self, log_que, temp_config,bak_dir):
+        super(LocalOperate, self).__init__()
         self.temp_config = temp_config
-        self.osn_dir = temp_config['from']
-        self.file_pattern = temp_config['file']
-        self.remote_dir = temp_config['to']
-        self.bak_dir = bak_dir
         self.log_que = log_que
-        self.log_entity = {
-            'startSsh': '',
-            'login': '',
-            'kind': '',
-            # 'statusCode': '',
-            'status': True,
-            'pattern': self.temp_config['file'],
-            'ip': self.temp_config['ip'],
-            'list': []
-        }
-        self.status = True
-        self.status_code = '0000'
-
-    def _set_code_status(self, state, code, message=''):
-        self.status_code = code
-        self.status = state
-        if not state and self.log_entity['status']:
-            self.log_entity['status'] = False
-        if not state:
-            return False, self.statusCode[code]+' '+message
-        else:
-            return True, self.statusCode[code]
-
-    def __find_local_file(self):
-        up_list = glob.glob(os.path.join(self.osn_dir, self.file_pattern))
-        return up_list
-
-    def __compare_local_size(self, osn_dir, filename):
-        status = super()._compare_local_size(osn_dir, filename)
-        if status:
-            return self._set_code_status(True, '3005')
-        else:
-            return self._set_code_status(False, '3006', 'compare more than 10 times')
-
-    def __bak_file(self, item, bak_dir):
-        try:
-            super()._bak_file(item, bak_dir)
-            return self._set_code_status(True, '3013')
-        except Exception as e:
-            return self._set_code_status(False, '3014', str(e))
-
-    def __move_file(self, item):
-        try:
-            local_local_file = item
-            local_remote_file = os.path.join(self.remote_dir, os.path.basename(item))
-            shutil.copy(local_local_file, local_remote_file)
-            os.chmod(local_remote_file, stat.S_IRWXU | stat.S_IRGRP | stat.S_IROTH)
-            return self._set_code_status(True, '3007')
-        except Exception as e:
-            return self._set_code_status(False, '3008', str(e))
-
-    def __rm_local_file(self, item):
-        try:
-            super()._rm_local_file(item)
-            return self._set_code_status(True, '3011')
-        except Exception as e:
-            return self._set_code_status(False, '3012', str(e))
+        self.bak_dir = bak_dir
 
     def __combine_local(self, filename):
-        all_filename = os.path.join(self.osn_dir, filename)
-        com_code, com_message = self.__compare_local_size(self.osn_dir, filename)
-        if not com_code:
-            return self._inner_log_entity(compare=com_message)
-        bak_code, bak_message = self.__bak_file(all_filename, self.bak_dir)
-        if not bak_code:
-            return self._inner_log_entity(compare=com_message, bak=bak_message)
-        up_code, up_message = self.__move_file(filename)
-        if not up_code:
-            return self._inner_log_entity(compare=com_message, bak=bak_message, transport=up_message)
-        rm_code, rm_messag = self.__rm_local_file(all_filename)
-        return self._inner_log_entity(compare=com_message, bak=bak_message, transport=up_message,
-                                      remove=rm_messag)
+        all_filename = os.path.join(self.temp_config['from'], filename)
+        compare_status, compare_code, compare_message = self._compare_local_size(osn_dir=self.temp_config['from'],
+                                                                                filename=filename)
+        if not compare_status:
+            return compare_status, compare_code, compare_message
+        bak_status, bak_code, bak_message = self._bak_file(item=all_filename, bak_dir=self.bak_dir)
+        if not bak_status:
+            return bak_status, bak_code, bak_message
+        up_status, up_code, up_message = self._move_file(file_name=filename, hsn_dir=self.temp_config['to'])
+        if not up_status:
+            return up_status, up_code, up_message
+        rm_status, rm_code, rm_message = self._rm_local_file(item=all_filename)
+        if not rm_status:
+            return rm_status, rm_code, rm_message
+        return True, None, None
 
     def deal_local_config(self):
-        # print(self.temp_config)
-        channel = self.temp_config['channel']
-        self.log_entity['kind'] = channel
-        file_list = self.__find_local_file()
+        file_list = self._find_local_file(osn_dir=self.temp_config['from'],
+                                          file_pattern=self.temp_config['file'])
         for part in file_list:
             try:
-                inner_log_entity = self.__combine_local(part)
+                combine_status, combine_code, combine_message = self.__combine_local(part)
+                if combine_status:
+                    self.log_entity['okList'].append(part)
+                else:
+                    self.log_entity['statusCode'] = '0003'
+                    self.log_entity['errList'].append({'filename': part, "code": combine_code,
+                                                       'message': combine_message})
             except Exception as e:
-                _, other = self._set_code_status(False, '3015', str(e))
-                inner_log_entity = self._inner_log_entity(other=other)
                 traceback.print_exc()
-            inner_log_entity['filename'] = part
-            inner_log_entity['innerCode'] = self.status_code
-            inner_log_entity['innerStatus'] = self.status
-            self.log_entity['list'].append(inner_log_entity)
-        else:
-            _, other = self._set_code_status(True, '0002')
+                self.log_entity['errList'].append({'filename': part, "code": '3015',
+                                                   'message': str(e)})
+        if not len(file_list):
+            return self._set_log_status(self.temp_config, True, '0002', '', self.log_que)
+        self._set_base_status(self.temp_config)
         self._add_queue(self.log_que, self.log_entity)
+
 

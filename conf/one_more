@@ -1,0 +1,6 @@
+#sftp_up,D:\Game,192.168.200.12,appmon,3edcMJU&,linux???.txt,sign_sftp_up
+#sftp_up,D:\Game,192.168.200.12,appmon,3edcMJU&,windows???.txt,sign_sftp_up
+#sftp_down,/app/ext4_test/01,192.168.200.12,appmon,3edcMJU&,linux???.txt,sign_sftp_down
+#sftp_down,/app/ext4_test/01,192.168.200.12,appmon,3edcMJU&,windows???.txt,sign_sftp_down
+#local,D:\Game,-,-.-,-,Bs???.py,sign_local
+#local,D:\Game,-,-.-,-,Es???.py,sign_local

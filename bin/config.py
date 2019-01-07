@@ -1,12 +1,17 @@
 #!/usr/bin/env python
 # encoding: utf-8
-from bin.base import BaseObject
-from bin.threadPool import ThreadPoolObj
+try:
+    from base import BaseObject
+    from threadPool import ThreadPoolObj
+    from sign import read_db
+except ModuleNotFoundError:
+    from bin.base import BaseObject
+    from bin.threadPool import ThreadPoolObj
+    from bin.sign import read_db
 import traceback
 import os
 
 """
-v1.0.1
 @author hananmin
 function:
     - 加载配置文件
@@ -20,7 +25,7 @@ function:
 class ReadConfig(BaseObject):
 
     def __init__(self, log_que, config_que, event, bak_dir):
-        super().__init__()
+        super(ReadConfig, self).__init__()
         self.config_que = config_que
         self.event = event
         self.log_que = log_que
@@ -71,7 +76,8 @@ class ReadConfig(BaseObject):
 
     def __remove_n(self, list_obj):
         try:
-            return list_obj.remove('\n')
+            list_obj.remove('\n')
+            return list_obj
         except ValueError:
             return list_obj
         except:
@@ -84,7 +90,7 @@ class ReadConfig(BaseObject):
         with open(self.up_config, 'r') as up_f_obj:
             up_lines = up_f_obj.readlines()
         up_lines = self.__remove_n(up_lines)
-        if up_lines:
+        if up_lines or len(up_lines) == 0:
             for temp_part in up_lines:
                 temp_status, part = self.__exclude_annotations(temp_part)
                 if temp_status:
@@ -99,13 +105,13 @@ class ReadConfig(BaseObject):
                             'file': part[1],
                             }
                         up_config_list.append(temp)
-                    except IndexError as index:
+                    except IndexError:
                         err_nums = err_nums+1
             self.__end_read_config(kind=kind, err_nums=err_nums, config_list=up_config_list,
                                    all_nums=len(up_lines))
         else:
             # self._add_log_queue(log_que=self.log_que, kind=kind, status_code='1009')
-            print(kind, '未读取到配置文件')
+            print(kind, 'The configuration file was not read')
 
     def __deal_down_config(self, kind):
         down_config_list = []
@@ -114,7 +120,7 @@ class ReadConfig(BaseObject):
         with open(self.down_config, 'r') as down_f_obj:
             down_lines = down_f_obj.readlines()
         down_lines = self.__remove_n(down_lines)
-        if down_lines:
+        if down_lines or len(down_lines) == 0:
             for temp_part in down_lines:
                 temp_status, part = self.__exclude_annotations(temp_part)
                 if temp_status:
@@ -129,13 +135,13 @@ class ReadConfig(BaseObject):
                             'file': part[4],
                             }
                         down_config_list.append(temp)
-                    except IndexError as index:
+                    except IndexError:
                         err_nums = err_nums+1
             self.__end_read_config(kind=kind, err_nums=err_nums, config_list=down_config_list,
                                    all_nums=len(down_lines))
         else:
             # self._add_log_queue(log_que=self.log_que, kind=kind, status_code='1009')
-            print(kind, '未读取到配置文件')
+            print(kind, 'The configuration file was not read')
 
     def __deal_local_config(self):
         kind = 'local'
@@ -145,7 +151,7 @@ class ReadConfig(BaseObject):
         with open(self.local_config, 'r') as local_f_obj:
             local_lines = local_f_obj.readlines()
         local_lines = self.__remove_n(local_lines)
-        if local_lines:
+        if local_lines or len(local_lines) == 0:
             for temp_part in local_lines:
                 temp_status, part = self.__exclude_annotations(temp_part, other=0)
                 if temp_status:
@@ -160,13 +166,46 @@ class ReadConfig(BaseObject):
                             'file': part[1],
                             }
                         local_config_list.append(temp)
-                    except IndexError as index:
+                    except IndexError:
                         err_nums = err_nums+1
             self.__end_read_config(kind=kind, err_nums=err_nums, config_list=local_config_list,
                                    all_nums=len(local_lines))
         else:
             # self._add_log_queue(log_que=self.log_que, kind=kind, status_code='1009')
-            print(kind, '未读取到配置文件')
+            print(kind, 'The configuration file was not read')
+
+    def __deal_one_more_config(self):
+        kind = 'one_more'
+        more_config_list = []
+        err_nums = 0
+        sign_data = read_db()
+        self.more_config = os.path.join(self.config_dir, kind)
+        with open(self.more_config, 'r') as more_f_obj:
+            more_lines = more_f_obj.readlines()
+            more_lines = self.__remove_n(more_lines)
+        if more_lines or len(more_lines) == 0:
+            for temp_part in more_lines:
+                temp_status, part = self.__exclude_annotations(temp_part)
+                if temp_status:
+                    try:
+                        temp = {
+                            'channel': kind,
+                            'type': part[0],
+                            'from': part[1],
+                            'to': sign_data[part[6]]['dirs'].split(),
+                            'ip': part[2],
+                            'user': part[3],
+                            'password': part[4],
+                            'file': part[5],
+                        }
+                        more_config_list.append(temp)
+                    except IndexError:
+                        err_nums = err_nums + 1
+            self.__end_read_config(kind=kind, err_nums=err_nums, config_list=more_config_list,
+                                   all_nums=len(more_lines))
+        else:
+            # self._add_log_queue(log_que=self.log_que, kind=kind, status_code='1009')
+            print(kind, 'The configuration file was not read')
 
     def __read_config(self):
         self.__deal_up_config('sftp_up')
@@ -174,6 +213,7 @@ class ReadConfig(BaseObject):
         self.__deal_up_config('ftp_up')
         self.__deal_down_config('ftp_down')
         self.__deal_local_config()
+        self.__deal_one_more_config()
 
     def run(self):
         self.__read_config()

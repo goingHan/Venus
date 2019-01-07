@@ -2,14 +2,21 @@
 # encoding: utf-8
 import threadpool
 import traceback
-from bin.base import BaseObject
 from multiprocessing.queues import Empty
-from bin.dealSftp import SftpOperate
-from bin.dealFtp import FtpOperate
-from bin.dealLocal import LocalOperate
+try:
+    from bin.base import BaseObject
+    from bin.dealSftp import SftpOperate
+    from bin.dealFtp import FtpOperate
+    from bin.dealLocal import LocalOperate
+    from bin.oneMore import OneMore
+except ModuleNotFoundError:
+    from base import BaseObject
+    from dealSftp import SftpOperate
+    from dealFtp import FtpOperate
+    from dealLocal import LocalOperate
+    from oneMore import OneMore
 
 """
-v1.0.1
 @author: hananmin
 @time: 2018/12/27 9:28
 @function:
@@ -20,7 +27,7 @@ v1.0.1
 class ThreadPoolObj(BaseObject):
 
     def __init__(self, logque, config_que, bak_dir):
-        super().__init__()
+        super(ThreadPoolObj, self).__init__()
         self.log_que = logque
         self.config_que = config_que
         self.bak_dir = bak_dir
@@ -32,11 +39,14 @@ class ThreadPoolObj(BaseObject):
             sftp_operate = SftpOperate(self.log_que, item, self.bak_dir)
             sftp_operate.deal_sftp_config()
         elif 'ftp' in channel:
-            ftp_operate = FtpOperate(self.log_que, item, self.bak_dir)
+            ftp_operate=FtpOperate(self.log_que, item, self.bak_dir)
             ftp_operate.deal_ftp_config()
         elif channel == 'local':
-            local_operate = LocalOperate(self.log_que, item, self.bak_dir)
+            local_operate = LocalOperate(self.log_que, item,self.bak_dir)
             local_operate.deal_local_config()
+        elif channel == 'one_more':
+            onemore_operate = OneMore(self.log_que, item, self.bak_dir)
+            onemore_operate.deal_one_more_config()
 
     def __get_que_data(self, ids):
         while True:
