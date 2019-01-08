@@ -68,7 +68,7 @@ python main.py insert sftp_up 001 hananmin /app /app01
 |sftp_up|表示sftp上传时使用|是|sftp_up,sftp_down,local|
 |001|标识的唯一值|是|可以自行定义，保持唯一|
 |hananmin|备注|是|可自行定义|
-|/app /app01|标志包含的目录名|是|可以写多个|
+|/app|标志包含的目录名|是|可以写多个|
 - 查询标志
 ```
 python main.py  look 001
