@@ -98,6 +98,9 @@ python main.py run '日志路径'
 建议使用nohup运行,如：
 `nohup python main.py run /app/log >> /app/log/venus.out 2>&1`
 
+#### 注意
+运行定时任务时，应该判断上次得定时任务是否已经运行完毕。
+
 #### 联系
 ----- 
 脚本和文档写的仓促，有问题就请加入 630300475 QQ群。@搬砖工即可。
