@@ -3,12 +3,13 @@
 
 try:
     from bin.base import MoreBase
-except ModuleNotFoundError:
+except ImportError:
     from base import MoreBase
 import os
 import traceback
 
 """
+v1.0.1
 @author: hananmin
 @time: 2018/12/29 10:57
 @function:

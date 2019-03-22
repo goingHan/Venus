@@ -9,7 +9,7 @@ try:
     from bin.dealFtp import FtpOperate
     from bin.dealLocal import LocalOperate
     from bin.oneMore import OneMore
-except ModuleNotFoundError:
+except ImportError:
     from base import BaseObject
     from dealSftp import SftpOperate
     from dealFtp import FtpOperate
@@ -17,6 +17,7 @@ except ModuleNotFoundError:
     from oneMore import OneMore
 
 """
+v1.0.1
 @author: hananmin
 @time: 2018/12/27 9:28
 @function:

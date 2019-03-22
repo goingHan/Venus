@@ -3,7 +3,7 @@
 from ftplib import FTP
 try:
     from bin.base import MoreBase, decorator_fun
-except ModuleNotFoundError:
+except ImportError:
     from base import MoreBase, decorator_fun
 from fnmatch import fnmatch
 import os
@@ -12,6 +12,7 @@ import traceback
 
 
 """
+v1.0.1
 @author: hananmin
 @time: 2018/12/28 21:14
 @function:

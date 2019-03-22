@@ -4,7 +4,7 @@ import logging
 import traceback
 try:
     from bin.base import BaseObject
-except ModuleNotFoundError:
+except ImportError: 
     from base import BaseObject
 import datetime
 import os
@@ -32,10 +32,16 @@ class LogGenerator(BaseObject):
         self.count = 0
         self.logdir = logdir
 
+    def __get_log_name(self, part):
+        dt = self._get_time(0)
+        log_name = os.path.join(self.logdir, '{0}-{1}'.format(part, dt))
+        return log_name
+
     def __set_up_log(self):
         logger = logging.getLogger('UP')
         logger.setLevel(logging.INFO)
-        log_name = os.path.join(self.logdir, 'up.log')
+        # log_name = os.path.join(self.logdir, 'up.log')
+        log_name = self.__get_log_name('up')
         fh = logging.FileHandler(log_name, mode='a+')
         fh.setLevel(logging.INFO)
         fh.setFormatter(self.log_format)
@@ -45,7 +51,8 @@ class LogGenerator(BaseObject):
     def __set_down_log(self):
         logger = logging.getLogger('DOWN')
         logger.setLevel(logging.INFO)
-        log_name = os.path.join(self.logdir, 'down.log')
+        # log_name = os.path.join(self.logdir, 'down.log')
+        log_name = self.__get_log_name('down')
         fh = logging.FileHandler(log_name, mode='a+')
         fh.setLevel(logging.INFO)
         fh.setFormatter(self.log_format)
@@ -55,7 +62,8 @@ class LogGenerator(BaseObject):
     def __set_local_log(self):
         logger = logging.getLogger('LOCAL')
         logger.setLevel(logging.INFO)
-        log_name = os.path.join(self.logdir, 'local.log')
+        # log_name = os.path.join(self.logdir, 'local.log')
+        log_name = self.__get_log_name('local')
         fh = logging.FileHandler(log_name, mode='a+')
         fh.setLevel(logging.INFO)
         fh.setFormatter(self.log_format)
@@ -76,10 +84,10 @@ class LogGenerator(BaseObject):
         status_info = self.statusCode[code]
         self.count = self.count + len(item['errList']) + len(item['okList'])
         if code in ['3001', '3004']:
-            head_list = [item['kind'], ' ', item['pattern'], item['to'], item['ip'], '', '', item['error']]
+            head_list = [item['kind'], ' ', item['from'], item['pattern'], item['to'], item['ip'], '', '', item['error']]
             message = ','.join(head_list)
         else:
-            head_list = [item['kind'], ' ',item['pattern'], item['to'], item['ip']]
+            head_list = [item['kind'], ' ', item['from'], item['pattern'], item['to'], item['ip']]
             ok_list = item['okList']
             err_list = ['{0}-({1})'.format(part['filename'], self.statusCode[part['code']]+' '+part['message'])
                          for part in item['errList']]
@@ -88,8 +96,8 @@ class LogGenerator(BaseObject):
             logger.info(message, extra={'statusCode': code,
                                          'statusInfo': status_info})
         else:
-            logger.error(message, extra={'statusCode': code,
-                                         'statusInfo': status_info})
+            logger.error(message, extra={'statusCode': '\033[1;35m'+code+'\033[0m',
+                                         'statusInfo': '\033[1;35m'+status_info+' \033[0m'})
 
     def __print_more_log(self, logger, item):
         code = item['statusCode']
@@ -98,10 +106,10 @@ class LogGenerator(BaseObject):
         ok_nums = sum([len(part['list']) for part in item['errList']])
         self.count = self.count + err_nums + ok_nums
         if code == '3001' or code == '3002':
-            head_list = [item['kind'], item['type'], item['pattern'], item['ip'], '', '', item['error']]
+            head_list = [item['kind'], item['type'], item['from'],item['pattern'], item['ip'], '', '', item['error']]
             message = ','.join(head_list)
         else:
-            head_list = [item['kind'], item['type'], item['pattern'], item['ip']]
+            head_list = [item['kind'], item['type'], item['from'],item['pattern'], item['ip']]
             ok_list = []
             for part in item['okList']:
                 file_name = part['filename']
@@ -118,8 +126,8 @@ class LogGenerator(BaseObject):
             logger.info(message, extra={'statusCode': code,
                                          'statusInfo': status_info})
         else:
-            logger.error(message, extra={'statusCode': code,
-                                         'statusInfo': status_info})
+            logger.error(message, extra={'statusCode': '\033[1;35m'+code+'\033[0m',
+                                         'statusInfo': '\033[1;35m'+status_info+' \033[0m'})
 
     def __generate_log(self, message):
         """
@@ -164,4 +172,5 @@ class LogGenerator(BaseObject):
                 # print(self.queue.qsize())
                 item = self.queue.get(block=False)
                 self.__generate_log(item)
+
 

@@ -11,6 +11,7 @@ import glob
 import stat
 
 """
+v1.0.1
 @author: hananmin
 @time: 2018/12/26 20:21
 @function:
@@ -35,14 +36,20 @@ class BaseObject(object):
             '0000': 'SUCCESS',
             '0002': 'NO FILE',
             '0003':  'HAS ERROR',
+            '3001': 'ssh connected failed',
             '3004': 'Login in failed',
             '3006': 'Compare failed',
+            '3007': 'upload successfully',
             '3008': 'upload failed',
+            '3009': 'download successfully',
             '3010': 'download failed',
+            '3011': 'remove successfully',
             '3012': 'remove failed',
+            '3013': 'backup successfully',
             '3014': 'backup failed',
             '3015': 'unknow error',
             '3016': 'ftp connected failed',
+            '3017': 'ftp connected successfully',
             '3018': 'local file open failed',
             '3019': 'Part error',
         }
@@ -54,6 +61,7 @@ class BaseObject(object):
         self.log_entity['ip'] = temp_config['ip']
         self.log_entity['pattern'] = temp_config['file']
         self.log_entity['to'] = temp_config['to']
+        self.log_entity['from'] = temp_config['from']
 
     def _set_log_status(self, temp_config, state, code, message, log_que):
         self._set_base_status(temp_config)
@@ -112,6 +120,7 @@ class BaseObject(object):
         file_name = os.path.basename(item)
         all_bak_file = os.path.join(bak_dir, file_name)
         shutil.copy(item, all_bak_file)
+        #shutil.copyfileobj(item, all_bak_file)
 
     def __check_port(self, host, port):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

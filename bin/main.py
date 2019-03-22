@@ -3,11 +3,11 @@
 try:
     from bin.createLog import LogGenerator
     from bin.config import ReadConfig
-    from bin.sign import help_db, insert_db, log_output, look_db, delete_db
-except ModuleNotFoundError:
+    from bin.sign import help_db, insert_db, log_output, look_db, delete_db, look_all_db
+except ImportError: 
     from createLog import LogGenerator
     from config import ReadConfig
-    from sign import help_db, insert_db, log_output, look_db, delete_db
+    from sign import help_db, insert_db, log_output, look_db, delete_db, look_all_db
 import multiprocessing
 import sys
 """
@@ -27,7 +27,7 @@ class MainFunction:
         self.config_que = multiprocessing.Queue()
         #
         self.event = multiprocessing.Event()
-        self.bak_dir = 'D:\Game\Config'
+        self.bak_dir = '/NSFTP/bak'
         self.log_dir = log_dir
 
     def run(self):
@@ -60,6 +60,8 @@ class MainFunction:
                 log_output(code, message)
             except Exception:
                 help_db()
+        elif way == 'lookAll':
+            look_all_db()
         elif way == 'delete':
             try:
                 db_key = args[0]
@@ -69,7 +71,7 @@ class MainFunction:
                 help_db()
         elif way == 'run':
             if len(args) > 0:
-                log_dir = args[1]
+                log_dir = args[0]
                 self.log_dir = log_dir
             self.run()
         else:

@@ -3,11 +3,12 @@
 
 try:
     from bin.base import MoreBase
-except ModuleNotFoundError :
+except ImportError:
     from base import MoreBase
 import os
 import traceback
 """
+v1.0.1
 @author: hananmin
 @time: 2019/1/3 15:46
 @function:
@@ -180,5 +181,8 @@ class OneMore(MoreBase):
         finally:
             types = self.temp_config['type']
             if 'sftp' in types:
-                self._close(self.sftp_objects, self.sftp_transport)
+                try:
+                     self._close(self.sftp_objects, self.sftp_transport)
+                except:
+                     pass
 

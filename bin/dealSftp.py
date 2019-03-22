@@ -3,12 +3,13 @@
 
 try:
     from bin.base import MoreBase
-except ModuleNotFoundError:
+except ImportError:
     from base import MoreBase
 import os
 import traceback
 
 """
+v1.0.1
 @author: hananmin
 @time: 2018/12/27 15:06
 @function:
@@ -104,7 +105,11 @@ class SftpOperate(MoreBase):
                 if not len(file_list):
                     return self._set_log_status(self.temp_config, True, '0002', '', self.log_que)
             self._set_base_status(self.temp_config)
-            self._add_queue(self.log_que, self.log_entity)
+        except Exception as e:
+            self.log_entity['statusCode'] = '0003'
+            self.log_entity['errList'].append({'filename': self.temp_config['from'], "code": '3015',
+                                               'message': str(e)})
         finally:
+            self._add_queue(self.log_que, self.log_entity)
             self._close(self.sftp_objects, self.sftp_transport)
 

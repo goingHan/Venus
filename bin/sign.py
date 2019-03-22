@@ -7,6 +7,7 @@ import time
 
 
 """
+v1.0.1
 @author: hananmin
 @time: 2019/1/3 10:43
 @function:
@@ -36,14 +37,14 @@ def log_output(code, message):
         print('{0} : {1}'.format(BASE_CODE[code], message))
     else:
         err_message = '{0} : {1}'.format(BASE_CODE[code], message)
-        print(r"\033[91m"+err_message+r"\033[0m")
+        print("\033[1;35m"+err_message+" \033[0m")
 
 
 def read_db():
     try:
         with open(DB_FILE, 'rb') as db:
             BASE_DATA = pickle.load(db)
-    except FileNotFoundError:
+    except Exception:
         BASE_DATA = {}
     return BASE_DATA
 
@@ -89,6 +90,12 @@ def look_db(db_key):
     info = "kind: {0} date: {1} remark: {2} \n  {3}".format(kind, riqi, remark, dirs)
     return '0000', info
 
+def look_all_db():
+    BASE_DATA = read_db()
+    for part in BASE_DATA.keys():
+       print'\033[1;35m'+'-------'+'\033[0m'
+       print(part, BASE_DATA[part])
+       print'\033[1;35m'+'-------'+'\033[0m'
 
 def delete_db(db_key):
     code, BASE_DATA = get_db_data(db_key)
@@ -111,7 +118,7 @@ def help_db():
             db_key unique key,defined ahead \n
     delete db_key \n
             db_key unique key,defined ahead \n
-    run   log_path \n
+    run    log_path \n
           log_path, The venus require the path where write the log   \n
     """)
 

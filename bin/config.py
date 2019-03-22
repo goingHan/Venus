@@ -4,7 +4,7 @@ try:
     from base import BaseObject
     from threadPool import ThreadPoolObj
     from sign import read_db
-except ModuleNotFoundError:
+except ImportError: 
     from bin.base import BaseObject
     from bin.threadPool import ThreadPoolObj
     from bin.sign import read_db
@@ -65,14 +65,21 @@ class ReadConfig(BaseObject):
             self.__look_list(config_list)
 
     def __exclude_annotations(self, entity, other=1):
-        temp_entity = entity.strip().strip('\n')
-        if temp_entity[0] == '#':
+        temp_entity = entity.strip()
+        try:
+            if not temp_entity:
+                return False, None
+            if temp_entity[0] == '#':
+                return False, None
+            else:
+                if other == 1:
+                    return True, entity.strip().split(',')
+                elif other == 0:
+                    return True, entity.strip().split()
+        except:
+            print('\033[1;35m'+'ERROR CONFIG'+'\033[0m', temp_entity, 'END')
+            traceback.print_exc()
             return False, None
-        else:
-            if other == 1:
-                return True, entity.strip().split(',')
-            elif other == 0:
-                return True, entity.strip().split()
 
     def __remove_n(self, list_obj):
         try:
@@ -82,6 +89,7 @@ class ReadConfig(BaseObject):
             return list_obj
         except:
             traceback.print_exc()
+            return []
 
     def __deal_up_config(self, kind):
         up_config_list = []
@@ -192,7 +200,8 @@ class ReadConfig(BaseObject):
                             'channel': kind,
                             'type': part[0],
                             'from': part[1],
-                            'to': sign_data[part[6]]['dirs'].split(),
+                            #'to': sign_data[part[6]]['dirs'].split(),
+                            'to': sign_data[part[6]]['dirs'],
                             'ip': part[2],
                             'user': part[3],
                             'password': part[4],
@@ -201,6 +210,7 @@ class ReadConfig(BaseObject):
                         more_config_list.append(temp)
                     except IndexError:
                         err_nums = err_nums + 1
+            
             self.__end_read_config(kind=kind, err_nums=err_nums, config_list=more_config_list,
                                    all_nums=len(more_lines))
         else:
@@ -220,4 +230,5 @@ class ReadConfig(BaseObject):
         pool_obj = ThreadPoolObj(self.log_que, self.config_que, self.bak_dir)
         pool_obj.pool()
         self.event.set()
+
 
