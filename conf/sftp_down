@@ -1,0 +1,97 @@
+#down file
+132.35.74.88,dzqt1,d09uGC*cz,/app/sftp/dzq_t1/chkfile/mkm_52_data/,MKM_??_????????_CON.dat,/NSFTP/fhbuser/download/
+132.35.74.88,dzqt1,d09uGC*cz,/app/sftp/dzq_t1/chkfile/mkm_52_data/,GRANT_??_????????_??_RSLT.dat,/NSFTP/fhbuser/download/
+132.35.74.88,dzqt1,d09uGC*cz,/app/sftp/dzq_t1/chkfile/mkm_52_data/,MBR_??_????????_??_RSLT.dat,/NSFTP/fhbuser/download/
+132.121.86.45,hongbao_ftp,Hongbao_2017,/data/outfile/hongbao_ftp/down/,DSJ_*.txt,/NSFTP/fhbuser/download/
+132.35.74.88,dzqt1,d09uGC*cz,/app/sftp/dzq_t1/chkfile/qdbh/,qddy_????????.dat,/NSFTP/fhbuser/download/
+#
+132.33.35.23,frece,testZz$nN01h,/outgoing,NUMS????????????????.TXT,/NSFTP/frmc/download
+132.33.35.23,frece,testZz$nN01h,/outgoing,C_B_A1_BSDM_STF_????????_????_?_1.XML.gz,/NSFTP/frmc/download
+132.33.35.23,frece,testZz$nN01h,/outgoing,C_B_A1_BSDM_ARE_????????_????_?_1.XML.gz,/NSFTP/frmc/download
+132.33.35.23,frece,testZz$nN01h,/outgoing,C_B_??_BSDM_CHL_????????_????_?_1.XML.gz,/NSFTP/frmc/download
+132.33.35.23,frece,testZz$nN01h,/outgoing,C_B_A1_BSDM_DPT_????????_????_?_1.XML.gz,/NSFTP/frmc/download
+132.33.35.23,frece,testZz$nN01h,/outgoing,????????_????_??_SynchronizeHLR_????_????.REQ,/NSFTP/frmc/download
+132.33.35.23,frece,testZz$nN01h,/outgoing,????????_????_??_SynchronizeHLRNum_????_????.REQ,/NSFTP/frmc/download
+132.33.35.23,frece,testZz$nN01h,/outgoing,????????_??_Staff.ECREQ,/NSFTP/frmc/download
+132.33.35.23,frece,testZz$nN01h,/outgoing,ICPROVDATA10????????_*.zip,/NSFTP/frmc/download
+132.33.35.23,frece,testZz$nN01h,/outgoing,ICPROVDATA38????????_*.zip,/NSFTP/frmc/download
+132.33.35.23,ftpnlpt,testZz$nN01h,/outgoing,C_B_B3_BSDM_RES_????????_????_A_1.XML.gz,/NSFTP/frmc/download
+132.33.35.23,ftpnlpt,testZz$nN01h,/outgoing,C_B_B3_BSDM_RES_????????_????_B_1.XML.gz,/NSFTP/frmc/download
+#zmm vop haokaerqi
+10.124.1.6,crmprod,1qaz2wsx,/UCRM/downfiles,SMS_CENTERNO_????????_????.RSP.txt,/NSFTP/frmc/download
+10.124.1.6,crmprod,1qaz2wsx,/UCRM/downfiles,ICDNSEG_????????_????.RSP,/NSFTP/frmc/download
+#add by zhangmy @2171109
+#北六工号
+132.33.35.23,ftpnlpt,testZz$nN01h,/outgoing,C_B_A1_BSDM_STF_????????_*_A_1.XML.gz,/NSFTP/fnlpt/download
+#部门
+132.33.35.23,ftpnlpt,testZz$nN01h,/outgoing,C_B_A1_BSDM_DPT_????????_*_A_1.XML.gz,/NSFTP/fnlpt/download
+#渠道
+132.33.35.23,ftpnlpt,testZz$nN01h,/outgoing,C_B_??_BSDM_CHL_????????_*_A_1.XML.gz,/NSFTP/fnlpt/download
+#南25工号
+132.33.35.23,ftpnlpt,testZz$nN01h,/outgoing,????????_??_Staff.ECREQ,/NSFTP/fnlpt/download
+#zmm,20171201,fujian quanminyingxiaoxitong
+130.38.27.31,nmuser,nmuser@test123,./NM/REWARD/DOWNLOAD,NMPRODUREWARD_SUCCESS_????????.txt,/NSFTP/qmyxuser/download
+130.38.27.31,nmuser,nmuser@test123,./NM/REWARD/DOWNLOAD,NMPRODUREWARD_FAIL_????????.txt,/NSFTP/qmyxuser/download
+#zmy b-sdm haoka
+132.42.34.172,uatbsdm1,uatbsdm1_acd067,/unibss/users/uatbsdm1/test_PNS_HLR,ALHLR????????.????.REC,/NSFTP/frmc/download
+132.42.34.172,uatbsdm1,uatbsdm1_acd067,/unibss/users/uatbsdm1/test_PNS_HLR,IMDHLR*.????.REC,/NSFTP/frmc/download
+#zmy 20171220 hongbao
+132.35.74.88,dzqt1,d09uGC*cz,/app/sftp/dzq_t1/chkfile/mkm_52_data/,MKM_52_????????.dat,/NSFTP/fhbuser/download/
+130.38.27.31,nmuser,nmuser@test123,./NM/REWARD/DOWNLOAD,AI_WOEF_ACCOUNT_BOOK_DTL_PAY_????????.txt,/NSFTP/qmyxuser/download
+130.38.27.31,nmuser,nmuser@test123,./NM/REWARD/DOWNLOAD,AI_WOEF_ACCOUNT_BOOK_PAY_????????.txt,/NSFTP/qmyxuser/download
+130.38.27.31,nmuser,nmuser@test123,./NM/REWARD/DOWNLOAD,AI_WOEF_ACCOUNT_BOOK_DTL_RECONCILIATION_????????.txt,/NSFTP/qmyxuser/download
+130.38.27.31,nmuser,nmuser@test123,./NM/REWARD/DOWNLOAD,AI_WOEF_ACCOUNT_BOOK_RECONCILIATION_????????.txt,/NSFTP/qmyxuser/download
+130.38.27.31,nmuser,nmuser@test123,./NM/REWARD/DOWNLOAD,AI_WOEF_ACCOUNT_RECONCILIATION_????????.txt,/NSFTP/qmyxuser/download
+132.33.35.23,ftpnlpt,testZz$nN01h,/outgoing,????????_17AP_electronInvoiceInfo_9900_xxxx.RSP,/NSFTP/fpwsale76/download
+#add by xt
+132.35.74.88,dzqt1,d09uGC*cz,/app/sftp/dzq_t1/chkfile/mkm_52_data/,GRANT_??_????????_??_RSLT.dat,/NSFTP/fqycenteruser/download/
+#add by zqw 2018/2/23 about woxingxiao
+132.33.35.23,ftpnlpt,testZz$nN01h,./outgoing,C_B_76AP_BSDM_ARE_00_????????_*_?_1.XML.gz,/NSFTP/fpwsale/download
+132.33.35.23,ftpnlpt,testZz$nN01h,./outgoing,C_B_76AP_BSDM_DPT_00_????????_*_?_1.XML.gz,/NSFTP/fpwsale/download
+132.33.35.23,ftpnlpt,testZz$nN01h,./outgoing,C_B_76AP_BSDM_CHL_00_????????_*_?_1.XML.gz,/NSFTP/fpwsale/download
+132.33.35.23,ftpnlpt,testZz$nN01h,./outgoing,C_B_76AP_BSDM_STF_00_????????_*_?_1.XML.gz,/NSFTP/fpwsale/download
+#wss 清算 全业务 支付公司
+132.33.35.23,ftpnlpt,testZz$nN01h,/outgoing,20??????_??_D400_01WoPay_1600_????.REQ,/NSFTP/fxzfuser/download
+132.33.35.23,ftpnlpt,testZz$nN01h,/outgoing,20??????_??_D400_02WoPay_1600_????.REQ,/NSFTP/fxzfuser/download
+132.33.35.23,ftpnlpt,testZz$nN01h,/outgoing,20??????_??_D400_03WoPay_1600_????.REQ,/NSFTP/fxzfuser/download
+132.33.35.23,ftpnlpt,testZz$nN01h,/outgoing,20??????_??_D400_04WoPay_1600_????.REQ,/NSFTP/fxzfuser/download
+132.33.35.23,ftpnlpt,testZz$nN01h,/outgoing,20??????_??_1600_01WoPayBack_D400_????.RSP,/NSFTP/fxzfuser/download
+132.33.35.23,ftpnlpt,testZz$nN01h,/outgoing,20??????_??_1600_02WoPayBack_D400_????.RSP,/NSFTP/fxzfuser/download
+132.33.35.23,ftpnlpt,testZz$nN01h,/outgoing,20??????_??_1600_03WoPayBack_D400_????.RSP,/NSFTP/fxzfuser/download
+132.33.35.23,ftpnlpt,testZz$nN01h,/outgoing,20??????_??_1600_04WoPayBack_D400_????.RSP,/NSFTP/fxzfuser/download
+#by zmy 20180427 hongbao
+132.35.74.88,dzqt1,d09uGC*cz,/app/sftp/dzq_t1/chkfile/mkm_52_data/,MKM_52_??????_CON.dat,/NSFTP/fhbuser/download_bak/
+132.35.74.88,dzqt1,d09uGC*cz,/app/sftp/dzq_t1/chkfile/mkm_52_data/,MKM_52_??????.dat,/NSFTP/fhbuser/download_bak/
+132.35.74.88,dzqt1,d09uGC*cz,/app/sftp/dzq_t1/chkfile/mkm_51_data/,MKM_51_??????_CON.dat,/NSFTP/fhbuser/download_bak/
+132.35.74.88,dzqt1,d09uGC*cz,/app/sftp/dzq_t1/chkfile/mkm_51_data/,MKM_51_??????.dat,/NSFTP/fhbuser/download_bak/
+#by zmy 20180509 zhifuhongsi  注释待用
+#132.35.74.88,dzqt1,d09uGC*cz,/app/sftp/dzq_t1/chkfile/mkm_51_data/,MKM_??_????????_MERC.dat,/NSFTP/fhshyyuser/download/
+#by bgy 20180907 zhifugongsi---hongbaozhongxin
+132.35.74.88,dzqt1,d09uGC*cz,/app/sftp/dzq_t1/chkfile/mkm_51_data,MKM_51_????????_ZDCHF.dat,/NSFTP/fhbuser/download
+#sn 20180928 cb--qyw--qingsuan
+132.33.35.23,fcasp,testZz$nN01h,./outgoing,????????_??_BroadbandRenewal_????_????.RSP,/NSFTP/fxzfuser/download
+#bgy 20181011 zfgs--hbzx
+132.35.74.88,dzqt1,d09uGC*cz,/app/sftp/dzq_t1/chkfile/mkm_51_data/,MKM_51_????????_MERC.dat,/NSFTP/fhbuser/download/
+#by zmy 20181101 yikachong
+#10.191.18.31,ftpnlpt,Zz$nN01h,./outgoing,????EDJF????????.???,/NSFTP/frmc/download
+132.33.35.23,ftpnlpt,testZz$nN01h,./outgoing,JFKB????????????.*,/NSFTP/frmc/download
+#huadan jike
+#10.190.2.94,esb_ip,Esb_ip@ftp,/esbdata/IDCdata/HuaDanDATA,HD_IDC_????????.????,/NSFTP/fjkjfuser/download
+#by zmy 20181227 yikachong
+132.33.35.23,ftpnlpt,testZz$nN01h,./outgoing,JFKSELL??????????.TXT,/NSFTP/frmc/download
+132.33.35.23,ftpnlpt,testZz$nN01h,./outgoing,JFKUNSELL??????????.TXT,/NSFTP/frmc/download
+132.33.35.23,ftpnlpt,testZz$nN01h,./outgoing,JFKLOGOUT??????????.TXT,/NSFTP/frmc/download
+132.33.35.23,ftpnlpt,testZz$nN01h,./outgoing,JFKDEFER??????????.TXT,/NSFTP/frmc/download
+132.33.35.23,ftpnlpt,testZz$nN01h,./outgoing,JFKCHAG??????????.TXT,/NSFTP/frmc/download
+132.33.35.23,ftpnlpt,testZz$nN01h,./outgoing,JFKACTIV??????????.TXT,/NSFTP/frmc/download
+132.33.35.23,ftpnlpt,testZz$nN01h,./outgoing,JFKUNACTIV??????????.TXT,/NSFTP/frmc/download
+132.33.35.23,ftpnlpt,testZz$nN01h,./outgoing,JFKSTOCK????????.TXT,/NSFTP/frmc/download
+#by sn 20190121
+132.33.35.23,ftpnlpt,testZz$nN01h,/outgoing,C_B_99_BSDM_STF_????????_????_A_1.XML.gz,/NSFTP/fjkzyuser/download
+132.33.35.23,ftpnlpt,testZz$nN01h,/outgoing,C_B_11_BSDM_CHL_????????_????_B_1.XML.gz,/NSFTP/fjkzyuser/download
+#by zmm 20190219 qyw-zqkhzx
+132.33.35.23,ftpnlpt,testZz$nN01h,/outgoing,CUST_TAXPAYERINFO_????????_??_????.?res,/NSFTP/fjkzqkhuser/download
+132.33.35.23,ftpnlpt,testZz$nN01h,/outgoing,CUST_ACCTMAILINFO_????????_??_????.?res,/NSFTP/fjkzqkhuser/download
+132.33.35.23,ftpnlpt,testZz$nN01h,/outgoing,CUST_TAXPAYERGETNFO_????????_??_????.?res,/NSFTP/fjkzqkhuser/download
+#by slh 20190220 jkzy-
+132.33.35.23,ftpnlpt,testZz$nN01h,/outgoing,C_B_99_BSDM_DPT_????????_????_A_1.XML.gz,/NSFTP/fjkzyuser/download
