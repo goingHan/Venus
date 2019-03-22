@@ -94,12 +94,13 @@ sftp_up,/app,192.168.200.12,appmon,123.com,linux???.txt,001
 #### 运行
 ----
 python main.py run '日志路径'
-- 日志路径是用来存储日志
-建议使用nohup运行,如：
-`nohup python main.py run /app/log >> /app/log/venus.out 2>&1`
-
-#### 注意
-运行定时任务时，应该判断上次得定时任务是否已经运行完毕。
+- 日志路径: 用来存储日志
+#### crontab
+----
+运行定时任务，如下例子
+```
+*/5 * * * * cd /app/Venus;nohup sh run.sh >> /app/Venus/logs/venus.out 2>&1 
+```
 
 #### 联系
 ----- 
