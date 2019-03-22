@@ -1,3 +1,3 @@
-logs/
-conf/
-db/
+logs/*
+*.pyc
+.idea/*
