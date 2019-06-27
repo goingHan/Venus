@@ -208,9 +208,9 @@ class ReadConfig(BaseObject):
                             'file': part[5],
                         }
                         more_config_list.append(temp)
-                    except IndexError:
+                    except (IndexError,KeyError):
                         err_nums = err_nums + 1
-            
+                        print('one_more_exception: %s is not found' % part[6])
             self.__end_read_config(kind=kind, err_nums=err_nums, config_list=more_config_list,
                                    all_nums=len(more_lines))
         else:
